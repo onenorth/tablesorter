@@ -1,4 +1,4 @@
-/*! tablesorter (FORK) - updated 06-07-2015 (v2.22.1)*/
+/*! tablesorter (FORK) - updated 06-09-2015 (v2.22.1)*/
 /* Includes widgets ( storage,uitheme,columns,filter,stickyHeaders,resizable,saveSort ) */
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
@@ -577,13 +577,13 @@
 					// add 'sorter-false' class if 'parser-false' is set
 					s = ts.getData( $th, col, 'sorter' ) === 'false' || ts.getData( $th, col, 'parser' ) === 'false';
 					$th[0].sortDisabled = s;
-					$th[ s ? 'addClass' : 'removeClass' ]('sorter-false').attr('aria-disabled', '' + s);
+					$th[ s ? 'addClass' : 'removeClass' ]('sorter-false').prop('aria-disabled', '' + s);
 					// aria-controls - requires table ID
 					if (table.id) {
 						if (s) {
-							$th.removeAttr('aria-controls');
+							$th.removeProp('aria-controls');
 						} else {
-							$th.attr('aria-controls', table.id);
+							$th.prop('aria-controls', table.id);
 						}
 					}
 				}
@@ -605,7 +605,7 @@
 				// remove all header information
 				c.$headers
 					.removeClass(css.join(' '))
-					.addClass(none).attr('aria-sort', 'none')
+					.addClass(none).prop('aria-sort', 'none')
 					.find('.' + ts.css.icon)
 					.removeClass(cssIcon.join(' '))
 					.addClass(cssIcon[2]);
@@ -620,7 +620,7 @@
 									f.eq(j)
 										.removeClass(none)
 										.addClass(css[list[i][1]])
-										.attr('aria-sort', aria[list[i][1]])
+										.prop('aria-sort', aria[list[i][1]])
 										.find('.' + ts.css.icon)
 										.removeClass(cssIcon[2])
 										.addClass(cssIcon[list[i][1]]);
@@ -644,7 +644,7 @@
 						txt = $.trim( $h.text() ) + ': ' +
 							ts.language[ $h.hasClass( ts.css.sortAsc ) ? 'sortAsc' : $h.hasClass( ts.css.sortDesc ) ? 'sortDesc' : 'sortNone' ] +
 							ts.language[ nextSort === 0 ? 'nextAsc' : nextSort === 1 ? 'nextDesc' : 'nextNone' ];
-						$h.attr( 'aria-label', txt );
+						$h.prop( 'aria-label', txt );
 					}
 				}
 			}
@@ -1171,7 +1171,7 @@
 				if (c.$table.children('caption').length) {
 					k = c.$table.children('caption')[0];
 					if (!k.id) { k.id = c.namespace.slice(1) + 'caption'; }
-					c.$table.attr('aria-labelledby', k.id);
+					c.$table.prop('aria-labelledby', k.id);
 				}
 				c.widgetInit = {}; // keep a list of initialized widgets
 				// change textExtraction via data-attribute
@@ -1494,9 +1494,9 @@
 					.unbind( events.replace(/\s+/g, ' ') );
 				c.$headers.add($f)
 					.removeClass( [ts.css.header, c.cssHeader, c.cssAsc, c.cssDesc, ts.css.sortAsc, ts.css.sortDesc, ts.css.sortNone].join(' ') )
-					.removeAttr('data-column')
-					.removeAttr('aria-label')
-					.attr('aria-disabled', 'true');
+					.removeProp('data-column')
+					.removeProp('aria-label')
+					.prop('aria-disabled', 'true');
 				$r.find(c.selectorSort).unbind( ('mousedown mouseup keypress '.split(' ').join(c.namespace + ' ')).replace(/\s+/g, ' ') );
 				ts.restoreHeaders(table);
 				$t.toggleClass(ts.css.table + ' ' + c.tableClass + ' tablesorter-' + c.theme, removeClasses === false);
