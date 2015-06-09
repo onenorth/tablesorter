@@ -29,7 +29,7 @@
   "docs": "http://mottie.github.com/tablesorter/docs/index.html",
   "demo": "https://github.com/Mottie/tablesorter/wiki",
   "dependencies": {
-    "jquery": ">=1.2.6"
+    "jquery": ">=1.6.0"
   },
   "keywords": [
     "table",
